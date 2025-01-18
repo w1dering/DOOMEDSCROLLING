@@ -1,7 +1,9 @@
 .current-short {
-    width: 20%;
+    flex: 10;
     height: 100%;
     padding: 4%;
     border-radius: 10px;
     background-color: #141414;
+    overflow: hidden;
+    
 }

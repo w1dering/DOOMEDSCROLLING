@@ -12,17 +12,13 @@
 }
 
 .user-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 1rem;
     margin-bottom: 1rem;
     padding: 1rem;
     border-radius: 4px;
-    height: 30%;
-}
-
-.user-info {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
     width: 100%;
-    height: 100%;
-    justify-content: left;
+    height: 30%;
 }

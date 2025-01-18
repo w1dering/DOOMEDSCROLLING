@@ -96,12 +96,10 @@ const UsersPanel = () => {
 			<div className="users-list">
 				{users.map((user) => (
 					<div key={user.id} className="user-item">
-						<div className="user-info">
 							<Icon user={user} />
 							<Preferences user={user} />
 							<CurrentShort user={user} />
                             <AddShort user={user} />
-						</div>
 					</div>
 				))}
 			</div>
