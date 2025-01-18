@@ -3,6 +3,9 @@ import "./Preferences.css";
 interface User {
     id: string;
     name: string;
+    occupation: string;
+    age: number;
+    searchHistory: string[];
 }
 
 interface PreferencesProps {
@@ -10,7 +13,14 @@ interface PreferencesProps {
 }
 
 const Preferences = ({ user }: PreferencesProps) => {
-    return <div className="preferences">Preferences for {user.name}</div>;
+    return (
+        <div className="preferences">
+            <h3>{user.name}</h3>
+            <p>{user.occupation}</p>
+            <p>{user.age}</p>
+            <p>{user.searchHistory.join(", ")}</p>
+        </div>
+    );
 };
 
 export default Preferences;
