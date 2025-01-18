@@ -3,6 +3,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	user-select: none;
+	color: white;
 }
 
 html,
@@ -14,4 +15,7 @@ body,
 
 #root {
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
 }
