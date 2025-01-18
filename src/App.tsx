@@ -5,8 +5,9 @@ import UsersPanel from "./components/Users/UsersPanel";
 const App = () => {
 	return (
 		<>
-			<ShortsPanel />
 			<UsersPanel />
+			<ShortsPanel />
+			
 		</>
 	);
 };
