@@ -1,0 +1,196 @@
+{
+    "videos": [
+        {
+            "imgSrc": "./puppy.gif",
+            "text": "Playing fetch with Bruno! #dog #cute #sports"
+        },
+        {
+            "imgSrc": "./food.gif",
+            "text": "Delicious pasta recipe revealed! #food #cooking #yum"
+        },
+        {
+            "imgSrc": "./singer.gif",
+            "text": "Singing my heart out! #music #talent #performance"
+        },
+        {
+            "imgSrc": "./sword_fight.gif",
+            "text": "Epic sword fight scene! #action #movies #fun"
+        },
+        {
+            "imgSrc": "./tennis.gif",
+            "text": "Tennis match highlights! #sports #tennis #competition"
+        },
+        {
+            "imgSrc": "./volcano.gif",
+            "text": "Volcano eruption in slow-mo! #science #nature #amazing"
+        },
+        {
+            "imgSrc": "./puppy.gif",
+            "text": "Cute puppy playing outside! #dog #cute #playtime"
+        },
+        {
+            "imgSrc": "./food.gif",
+            "text": "Baking a chocolate cake! #baking #dessert #yum"
+        },
+        {
+            "imgSrc": "./singer.gif",
+            "text": "Covering a classic song! #music #cover #singer"
+        },
+        {
+            "imgSrc": "./sword_fight.gif",
+            "text": "Training for a duel! #swordfight #training #fun"
+        },
+        {
+            "imgSrc": "./tennis.gif",
+            "text": "Tennis skills you need! #sports #skills #tennis"
+        },
+        {
+            "imgSrc": "./volcano.gif",
+            "text": "Exploring active volcanoes! #science #adventure #travel"
+        },
+        {
+            "imgSrc": "./puppy.gif",
+            "text": "Puppy learns new tricks! #dog #training #cute"
+        },
+        {
+            "imgSrc": "./food.gif",
+            "text": "Quick breakfast ideas! #food #breakfast #healthy"
+        },
+        {
+            "imgSrc": "./singer.gif",
+            "text": "Live concert moments! #music #live #concert"
+        },
+        {
+            "imgSrc": "./sword_fight.gif",
+            "text": "Choreographed sword fight! #dance #action #fun"
+        },
+        {
+            "imgSrc": "./tennis.gif",
+            "text": "Top tennis players of 2023! #sports #tennis #ranking"
+        },
+        {
+            "imgSrc": "./volcano.gif",
+            "text": "Volcanoes around the world! #science #travel #nature"
+        },
+        {
+            "imgSrc": "./puppy.gif",
+            "text": "Puppy cuddles are the best! #dog #cute #love"
+        },
+        {
+            "imgSrc": "./food.gif",
+            "text": "Street food adventures! #food #travel #delicious"
+        },
+        {
+            "imgSrc": "./singer.gif",
+            "text": "Singing in the rain! #music #fun #joy"
+        },
+        {
+            "imgSrc": "./sword_fight.gif",
+            "text": "Learning sword techniques! #martialarts #training #fun"
+        },
+        {
+            "imgSrc": "./tennis.gif",
+            "text": "Tennis match analysis! #sports #analysis #tennis"
+        },
+        {
+            "imgSrc": "./volcano.gif",
+            "text": "Volcano eruption simulation! #science #experiment #fun"
+        },
+        {
+            "imgSrc": "./puppy.gif",
+            "text": "Puppy vs. mirror! #dog #funny #cute"
+        },
+        {
+            "imgSrc": "./food.gif",
+            "text": "Healthy smoothie recipes! #food #healthy #smoothie"
+        },
+        {
+            "imgSrc": "./singer.gif",
+            "text": "Behind the scenes of a show! #music #behindthescenes #fun"
+        },
+        {
+            "imgSrc": "./sword_fight.gif",
+            "text": "Epic battle reenactment! #history #action #fun"
+        },
+        {
+            "imgSrc": "./tennis.gif",
+            "text": "Tennis match highlights! #sports #tennis #competition"
+        },
+        {
+            "imgSrc": "./volcano.gif",
+            "text": "Volcano facts you didn't know! #science #education #fun"
+        },
+        {
+            "imgSrc": "./food.gif",
+            "text": "Unicorns in the kitchen! #fantasy #cooking #fun"
+        },
+        {
+            "imgSrc": "./singer.gif",
+            "text": "Time travel with music! #music #time #adventure"
+        },
+        {
+            "imgSrc": "./puppy.gif",
+            "text": "Dancing with my pet! #dance #pets #fun"
+        },
+        {
+            "imgSrc": "./sword_fight.gif",
+            "text": "Cooking with a lightsaber! #cooking #sci-fi #fun"
+        },
+        {
+            "imgSrc": "./volcano.gif",
+            "text": "Alien invasion in the city! #sci-fi #action #fun"
+        },
+        {
+            "imgSrc": "./tennis.gif",
+            "text": "Extreme ironing on a cliff! #extreme #fun #adventure"
+        },
+        {
+            "imgSrc": "./food.gif",
+            "text": "How to train your dragon! #fantasy #pets #fun"
+        },
+        {
+            "imgSrc": "./singer.gif",
+            "text": "Singing with the stars! #music #space #fun"
+        },
+        {
+            "imgSrc": "./puppy.gif",
+            "text": "Puppy detective solving mysteries! #dog #detective #fun"
+        },
+        {
+            "imgSrc": "./sword_fight.gif",
+            "text": "Cooking with fire-breathing dragons! #fantasy #cooking #fun"
+        },
+        {
+            "imgSrc": "./volcano.gif",
+            "text": "Building a robot army! #robots #science #fun"
+        },
+        {
+            "imgSrc": "./tennis.gif",
+            "text": "Tennis on the moon! #sports #space #fun"
+        },
+        {
+            "imgSrc": "./food.gif",
+            "text": "Gourmet meals for superheroes! #food #superheroes #fun"
+        },
+        {
+            "imgSrc": "./singer.gif",
+            "text": "Singing underwater with fish! #music #ocean #fun"
+        },
+        {
+            "imgSrc": "./puppy.gif",
+            "text": "Puppy yoga for relaxation! #dog #yoga #fun"
+        },
+        {
+            "imgSrc": "./sword_fight.gif",
+            "text": "Epic battles in a candy land! #fantasy #action #fun"
+        },
+        {
+            "imgSrc": "./volcano.gif",
+            "text": "Volcano surfing adventure! #extreme #adventure #fun"
+        },
+        {
+            "imgSrc": "./tennis.gif",
+            "text": "Tennis with a twist! #sports #fun #creative"
+        }
+    ]
+}

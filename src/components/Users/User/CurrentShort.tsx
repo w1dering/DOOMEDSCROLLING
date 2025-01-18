@@ -31,7 +31,7 @@ const CurrentShort = ({ user }: CurrentShortProps, { tags }: ShortProps) => {
                     model: "gpt-3.5-turbo",
                     messages: [{
                         role: "user",
-                        content: `You are ${user.name} and you are judging a short. You are a ${user.occupation} and you are ${user.age} years old. You enjoy ${user.likes.join(", ")} and dislike ${user.dislikes.join(", ")}. You are judging the short and you are giving it a score of 1 to 10. The short has tags ${tags.join(", ")}. Give it a score of 1 to 10, where 1 is the lowest possible score and 10 is the highest possible score. Return your score as a JSON object in the following format: {"score": 10}`
+                        content: `You are ${user.name} and you are judging a short. You are a ${user.occupation} and you are ${user.age} years old. You enjoy ${user.likes.join(", ")} and dislike ${user.dislikes.join(", ")}. You are determining whether or not to give your attention to a short form video represented by giving it a score of 1 to 10. The short has tags ${tags.join(", ")}. Give it a score of 1 to 10, where a score of 1 is the minimum score, representing an extremely negative reaction to the short, and 10 is the highest possible score, representing an extremely positive reaction to the short. A score of 5 indicates that your reaction to the short is neutral. Return your score as a JSON object in the following format: {"score": 10}`
                     }],
                     temperature: 0.7
                 })
@@ -66,7 +66,9 @@ const CurrentShort = ({ user }: CurrentShortProps, { tags }: ShortProps) => {
         }
     };
 
-    return <div className="current-short">CurrentShort for {user.name} id {user.id}</div>;
+    return (
+        <div className="current-short">CurrentShort for {user.name} id {user.id}</div>
+    );
 };
 
 export default CurrentShort;
