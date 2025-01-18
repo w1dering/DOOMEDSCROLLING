@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'TikTokDisplay';
+    src: url('./assets/fonts/TikTokDisplay-Regular.ttf') format('truetype'), url('./assets/fonts/TikTokDisplay-Bold.ttf') format('truetype');
+}
+
+* {
+    font-family: 'TikTokText', sans-serif;
+}

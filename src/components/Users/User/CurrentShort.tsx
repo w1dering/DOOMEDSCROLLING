@@ -10,7 +10,7 @@ interface CurrentShortProps {
 }
 
 const CurrentShort = ({ user }: CurrentShortProps) => {
-    return <div className="shorts-queue">CurrentShort for {user.name}</div>;
+    return <div className="current-short">CurrentShort for {user.name}</div>;
 };
 
 export default CurrentShort;
