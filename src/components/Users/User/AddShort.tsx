@@ -10,7 +10,11 @@ interface Props {
 }
 
 const AddShort = ({user} : Props) => {
-	return <div className="add-short">Current add short</div>;
+	return (
+	<div className="add-short">
+		Current add short
+	</div>
+	)
 };
 
 export default AddShort;

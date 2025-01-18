@@ -17,7 +17,9 @@ const UsersPanel = () => {
 					<div key={user.id} className="user-item">
 							<Icon user={user} />
 							<Preferences user={user} />
-							<Short type="current" content={{imgSrc: "", text: "balls"}} />
+							<Short type="current" content={{
+								imgSrc: "", text: "balls"
+								}} />
                             <Short type="add"/>
 					</div>
 				))}

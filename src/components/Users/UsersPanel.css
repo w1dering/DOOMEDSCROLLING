@@ -8,6 +8,7 @@
     height: 100%;
     overflow-y: auto;
     padding: 1rem;
+    
 }
 
 .user-item {
@@ -21,3 +22,4 @@
     width: 100%;
     height: 30%;
 }
+

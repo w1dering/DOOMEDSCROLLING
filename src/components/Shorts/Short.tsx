@@ -10,7 +10,9 @@ interface Props {
 
 const Short = ({type = "random", content = {imgSrc: "", text: ""}} : Props) => {
     if (type == "add") {
-        return <div className="short add-short">+</div>;
+        return <div className="short add-short">
+            <img src = "src\assets\PlusIcon.png" alt = "plus"/>
+        </div>;
     }
     return <div className={`short ${type}-short`}>{content.text}</div>;
 }
