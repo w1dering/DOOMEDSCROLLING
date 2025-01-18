@@ -1,0 +1,36 @@
+.short {
+    aspect-ratio: 9/16;
+    border: 2px solid white;
+    text-align: center;
+    margin: 5px;
+    border-radius: 5%;
+}
+
+.current-short {
+
+}
+
+.add-short {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4%;
+    border-radius: 10px;
+    background-color: #141414;
+    overflow: hidden;
+    border: 2px dashed white;
+    font-size: 25px;
+}
+
+.trending-short {
+    
+}
+
+.random-short {
+    
+}
+
+.pinned-short {
+    
+}

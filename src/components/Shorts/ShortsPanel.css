@@ -1,23 +1,22 @@
 #shorts-panel {
     height: 100%;
-    width:35%;
+    flex: 4;
+}
+
+#trending-shorts-panel {
+    display: flex; 
     flex-direction: column;
-    
+    align-items: center;
+    height: 33%;
+    overflow: auto;
 }
 
-#trending{
-    display:flex; 
-    flex-direction:column;
-    align-items:center;
-    height:50%;
-}
-
-h1{
+h1 {
     margin-bottom: 10px;
     text-align: center;
 }
 
-#slots{
+.slots-wrapper {
 
     display: grid; 
     grid-template-columns: repeat(5, 1fr); 
@@ -28,15 +27,8 @@ h1{
     min-height: 50%;
     
 }
-#indiv-slot{
-    flex:1;
-    border: 2px solid #000;
-    text-align:center;
-    margin:5px;
-    border-radius: 5%;
-}
 
-#random {
-    height:50%;
+#random-shorts-panel {
+    height:67%;
 }
 
