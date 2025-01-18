@@ -1,7 +1,14 @@
 import "./App.css";
+import ShortsPanel from "./components/Shorts/ShortsPanel";
+import UsersPanel from "./components/Users/UsersPanel";
 
 const App = () => {
-	return <h1>DOOMED TO SCROLL</h1>
+	return (
+		<>
+			<ShortsPanel />
+			<UsersPanel />
+		</>
+	);
 };
 
 export default App;
