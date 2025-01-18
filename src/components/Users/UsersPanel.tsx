@@ -11,6 +11,8 @@ interface User {
 	occupation: string;
 	age: number;
 	searchHistory: string[];
+	likes: string[];
+	dislikes: string[];
 }
 
 const UsersPanel = () => {
@@ -28,7 +30,7 @@ const UsersPanel = () => {
 					model: "gpt-3.5-turbo",
 					messages: [{
 						role: "user",
-						content: "Generate 5 random users with these properties: name, occupation, age (between 18-80), and search history (array of 3-5 recent searches). Return only a valid JSON array with no additional text."
+						content: "Generate 5 random users with these properties: name, occupation, age (between 18-80), search history (array of 3-5 recent searches), a list of 3-5 topics they like, and a list of 3-5 topics they dislike. Return only a valid JSON array with no additional text. Give each user a unique personality reflected through their search history, likes, and dislikes. Likes and dislikes may not necessarily be opposites or directly related to the occupation. Please return the JSON in the following format: [{name: 'John Doe', occupation: 'Software Engineer', age: 30, searchHistory: ['search1', 'search2', 'search3'], likes: ['topic1', 'topic2', 'topic3'], dislikes: ['topic4', 'topic5', 'topic6'}]. The search history should be a list of 3-5 recent searches. The likes and dislikes should be a list of 3-5 topics that the user enjoys or does not enjoy watching on social media. For example, if the user is a software engineer, they may like topics related to technology, cats, or sports, but dislike topics related to politics or religion. The topics should be unique and not repeated."
 					}],
 					temperature: 0.7
 				})
@@ -49,24 +51,28 @@ const UsersPanel = () => {
 				generatedUsers = JSON.parse(content);
 				console.log('Parsed users:', generatedUsers);
 				
-				// Validate the structure of each user
+				// Update validation to check for all required fields
 				generatedUsers.forEach((user: any, index: number) => {
-					if (!user.name || !user.occupation || !user.age || !Array.isArray(user.search_history)) {
+					if (!user.name || 
+						!user.occupation || 
+						!user.age || 
+						!Array.isArray(user.searchHistory) || 
+						!Array.isArray(user.likes) || 
+						!Array.isArray(user.dislikes)) {
 						console.error(`Invalid user structure at index ${index}:`, user);
 						throw new Error(`User at index ${index} is missing required fields`);
 					}
 				});
 
-				const usersWithIds = generatedUsers.map((user: any, index: number) => {
-					const userWithId = {
-						name: user.name,
-						occupation: user.occupation,
-						age: user.age,
-						searchHistory: user.search_history
-					};
-					console.log('User with ID:', userWithId);
-					return userWithId;
-				});
+				const usersWithIds = generatedUsers.map((user: any, index: number) => ({
+					id: (index + 1).toString(),
+					name: user.name,
+					occupation: user.occupation,
+					age: user.age,
+					searchHistory: user.searchHistory,
+					likes: user.likes,
+					dislikes: user.dislikes
+				}));
 
 				setUsers(usersWithIds);
 			} catch (parseError) {

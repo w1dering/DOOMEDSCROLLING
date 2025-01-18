@@ -18,7 +18,7 @@ const Preferences = ({ user }: PreferencesProps) => {
             <h3>{user.name}</h3>
             <p>{user.occupation}</p>
             <p>{user.age}</p>
-            <p>{user.searchHistory.join(", ")}</p>
+            <p>Recent Searches: {user.searchHistory.join(", ")}</p>
         </div>
     );
 };

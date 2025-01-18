@@ -1,4 +1,5 @@
 import "./Icon.css";
+import logo from "../../../assets/logo.png";
 
 interface User {
     id: string;
@@ -10,7 +11,7 @@ interface IconProps {
 }
 
 const Icon = ({ user }: IconProps) => {
-    return <div className="icon">Icon for {user.name}</div>;
+    return <div className="icon_container"><img src={logo} alt="logo" className="icon"/></div>;
 };
 
 export default Icon;
