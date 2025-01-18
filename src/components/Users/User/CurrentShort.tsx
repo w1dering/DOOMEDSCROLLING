@@ -47,23 +47,15 @@ const CurrentShort = ({ user }: CurrentShortProps, { tags }: ShortProps) => {
             const content = data.choices[0].message.content;
             console.log('Raw content:', content);
             
-            let generatedUsers;
+            let score;
             try {
-                generatedUsers = JSON.parse(content);
-                console.log('Parsed users:', generatedUsers);
+                score = JSON.parse(content);
+                console.log('Parsed users:', score);
                 
-                generatedUsers.forEach((user: any, index: number) => {
-                    if (!user.id || 
-                        !user.name || 
-                        !user.occupation || 
-                        !user.age || 
-                        !Array.isArray(user.searchHistory) || 
-                        !Array.isArray(user.likes) || 
-                        !Array.isArray(user.dislikes)) {
-                        console.error(`Invalid user structure at index ${index}:`, user);
-                        throw new Error(`User at index ${index} is missing required fields`);
-                    }
-                });
+                if (!score) {
+                    console.error(`Invalid score`);
+                    throw new Error(`Score is invalid`);
+                }
             } catch (parseError) {
                 console.error('JSON Parse Error:', parseError);
                 console.log('Failed to parse content:', content);
