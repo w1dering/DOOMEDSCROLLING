@@ -8,13 +8,23 @@ interface Props {
     }
 }
 
-const Short = ({type = "random", content = {imgSrc: "", text: ""}} : Props) => {
+const Short = ({type, content} : Props) => {
     if (type == "add") {
         return <div className="short add-short">
             <img src = "src\assets\PlusIcon.png" alt = "plus"/>
         </div>;
+    } else if (type == "current") {
+        return <div className={`short current-short`}>
+            {content && (
+                <>
+                    <img src={content.imgSrc} alt="short thumbnail"/>
+                    <p>{content.text}</p>
+                </>
+            )}
+        </div>;
+    } else {
+        return <div className={`short ${type}-short`}>{content?.text}</div>;
     }
-    return <div className={`short ${type}-short`}>{content.text}</div>;
 }
 
 export default Short;

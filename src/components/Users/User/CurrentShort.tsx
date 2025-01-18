@@ -15,10 +15,10 @@ interface CurrentShortProps {
 }
 
 interface ShortProps {
-    tags: string[];
+    text: string;
 }
 
-const CurrentShort = ({ user }: CurrentShortProps, { tags }: ShortProps) => {
+const CurrentShort = ({ user }: CurrentShortProps, { text }: ShortProps) => {
     const judgeShort = async () => {
         try {
             const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -31,7 +31,7 @@ const CurrentShort = ({ user }: CurrentShortProps, { tags }: ShortProps) => {
                     model: "gpt-3.5-turbo",
                     messages: [{
                         role: "user",
-                        content: `You are ${user.name} and you are judging a short. You are a ${user.occupation} and you are ${user.age} years old. You enjoy ${user.likes.join(", ")} and dislike ${user.dislikes.join(", ")}. You are determining whether or not to give your attention to a short form video represented by giving it a score of 1 to 10. The short has tags ${tags.join(", ")}. Give it a score of 1 to 10, where a score of 1 is the minimum score, representing an extremely negative reaction to the short, and 10 is the highest possible score, representing an extremely positive reaction to the short. A score of 5 indicates that your reaction to the short is neutral. Return your score as a JSON object in the following format: {"score": 10}`
+                        content: `You are ${user.name} and you are judging a short. You are a ${user.occupation} and you are ${user.age} years old. You enjoy ${user.likes.join(", ")} and dislike ${user.dislikes.join(", ")}. You are determining whether or not to give your attention to a short form video represented by giving it a score of 1 to 10. The short has the following title: "${text}". Give it a score of 1 to 10, where a score of 1 is the minimum score, representing an extremely negative reaction to the short, and 10 is the highest possible score, representing an extremely positive reaction to the short. A score of 5 indicates that your reaction to the short is neutral. Return your score as a JSON object in the following format: {"score": 10}. Do not return anything else.`
                     }],
                     temperature: 0.7
                 })

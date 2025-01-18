@@ -28,7 +28,7 @@ const UsersPanel = () => {
 							<Icon user={user} />
 							<Preferences user={user} />
 							<Short type="current" content={{
-								imgSrc: "", text: "balls"
+								imgSrc: "src/assets/thumbnails/food.gif", text: "balls"
 								}} />
                             <Short type="add"/>
 					</div>
