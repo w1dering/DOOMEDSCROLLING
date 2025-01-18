@@ -7,11 +7,14 @@ import AddShort from "./User/AddShort";
 
 const UsersPanel = () => {
 	const users = useAppSelector(state => state.users.users);
+	const visibleUserIds = useAppSelector(state => state.users.visibleUsers);
+	
+	const visibleUsers = users.filter(user => visibleUserIds.includes(user.id));
 
 	return (
 		<div id="users-panel">
 			<div className="users-list">
-				{users.map((user) => (
+				{visibleUsers.map((user) => (
 					<div key={user.id} className="user-item">
 							<Icon user={user} />
 							<Preferences user={user} />

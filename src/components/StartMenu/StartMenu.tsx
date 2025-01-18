@@ -1,6 +1,6 @@
 import './StartMenu.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setUsers, setIsLoading } from '../../store/usersSlice';
+import { setUsers, setIsLoading, addVisibleUser } from '../../store/usersSlice';
 import { useState } from 'react';
 
 const StartMenu = () => {
@@ -21,7 +21,7 @@ const StartMenu = () => {
                     model: "gpt-3.5-turbo",
                     messages: [{
                         role: "user",
-                        content: "Generate 5 random users with these properties: name, occupation, age (between 18-80), search history (array of 3-5 recent searches), a list of 3-5 topics they like, and a list of 3-5 topics they dislike. Return only a valid JSON array with no additional text. Give each user a unique personality reflected through their search history, likes, and dislikes. Likes and dislikes may not necessarily be opposites or directly related to the occupation. Please return the JSON in the following format: [{name: 'John Doe', occupation: 'Software Engineer', age: 30, searchHistory: ['search1', 'search2', 'search3'], likes: ['topic1', 'topic2', 'topic3'], dislikes: ['topic4', 'topic5', 'topic6'}]. The search history should be a list of 3-5 recent searches. The likes and dislikes should be a list of 3-5 topics that the user enjoys or does not enjoy watching on social media. For example, if the user is a software engineer, they may like topics related to technology, cats, or sports, but dislike topics related to politics or religion. The topics should be unique and not repeated. If you choose to include a date in the search history (do not always include a date), note that it is currently January 2025."
+                        content: "Generate 5 random users with these properties: id (3 digit numerical), name, occupation, age (between 18 and 80), search history (array of 3 to 5 recent searches), a list of 3 to 5 topics they like to watch on social media, and a list of 3 to 5 topics they do not like to watch on social media. Return only a valid JSON array with no additional text. Give each user a unique personality reflected through their search history, likes, and dislikes. Likes and dislikes may not necessarily be opposites or directly related to the occupation. Please return the JSON in the following format: [{id: '123', name: 'John Doe', occupation: 'Software Engineer', age: 30, searchHistory: ['search1', 'search2', 'search3'], likes: ['topic1', 'topic2', 'topic3'], dislikes: ['topic4', 'topic5', 'topic6'}]. The search history should be a list of 3-5 recent searches that are related to the user's likes or occupation. For example, if the user is a software engineer, they may like topics related to technology, cats, or sports, but dislike topics related to politics or religion. This software engineer may have searched for 'cats' or 'sports' recently, but not 'politics'. The topics should be unique and not repeated. If you choose to include a date in the search history (do not always include a date), note that it is currently January 2025."
                     }],
                     temperature: 0.7
                 })
@@ -43,7 +43,8 @@ const StartMenu = () => {
                 console.log('Parsed users:', generatedUsers);
                 
                 generatedUsers.forEach((user: any, index: number) => {
-                    if (!user.name || 
+                    if (!user.id || 
+                        !user.name || 
                         !user.occupation || 
                         !user.age || 
                         !Array.isArray(user.searchHistory) || 
@@ -65,6 +66,9 @@ const StartMenu = () => {
                 }));
 
                 dispatch(setUsers(usersWithIds));
+                if (usersWithIds.length > 0) {
+                    dispatch(addVisibleUser(usersWithIds[0].id));
+                }
                 setIsVisible(false);
             } catch (parseError) {
                 console.error('JSON Parse Error:', parseError);
