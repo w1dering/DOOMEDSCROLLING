@@ -1,4 +1,34 @@
 #users-panel {
-    flex: 1;
+    flex: 6;
     height: 100%;
+    width: 60%;
+    overflow: hidden;
+    background-color: lightblue;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.users-list {
+    height: 100%;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.user-item {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 30%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    align-items: right;
+    justify-content: right;
 }
