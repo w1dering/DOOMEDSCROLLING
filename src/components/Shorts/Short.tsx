@@ -110,7 +110,9 @@ const Short = ({
                 width: 0,
                 height: 0,
 			});
-            
+            setTimeout(() => {
+                draggedShortContent = null;
+            }, 100)
         }
 	};
 
