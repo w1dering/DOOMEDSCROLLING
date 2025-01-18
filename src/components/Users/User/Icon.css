@@ -5,4 +5,8 @@
 .icon_container {
     height: 100%;
     flex: 15;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -12,6 +12,7 @@ const UsersPanel = () => {
 
 	return (
 		<div id="users-panel">
+			<h1>Users Panel</h1>
 			<div className="users-list">
 				{visibleUsers.map((user) => (
 					<div key={user.id} className="user-item">
