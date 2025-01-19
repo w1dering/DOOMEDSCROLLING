@@ -6,15 +6,15 @@ import Preferences from "./User/Preferences";
 import Attention from "./User/Attention";
 import Short from "../Shorts/Short";
 import Scoreboard from "../ScoreBoard/Scoreboard";
-import DayTimer from "../DayTimer/DayTimer";
-import { useDispatch } from "react-redux";
-import { setUsers } from "../../store/usersSlice";
+// import DayTimer from "../DayTimer/DayTimer";
+// import { useDispatch } from "react-redux";
+// import { setUsers } from "../../store/usersSlice";
 
 const UsersPanel = () => {
 	const users = useAppSelector((state) => state.users.users);
 	const visibleUserIds = useAppSelector((state) => state.users.visibleUsers);
 	const [lastVisibleIndex, setLastVisibleIndex] = useState(0);
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 
 	const visibleUsers = users.filter((user) =>
 		visibleUserIds.includes(user.id)
@@ -24,9 +24,14 @@ const UsersPanel = () => {
 	const [percentTimeUsed, setPercentTimeUsed] = useState(0); // initialize percent time used
 	const [timeUntilNextUser, setTimeUntilNextUser] = useState(3);
 
+	score;
+	percentTimeUsed;
+
 	const updateScore = (newScore: number) => {
 		setScore((prevScore) => prevScore + newScore); // function to update score
 	};
+
+	updateScore(1);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -45,7 +50,7 @@ const UsersPanel = () => {
 	}, []);
 
 	useEffect(() => {
-		const timeout = setTimeout(() => {
+		setTimeout(() => {
 			if (visibleUsers.length < 3) {
 				visibleUserIds.push(users[lastVisibleIndex + 1].id);
 			}

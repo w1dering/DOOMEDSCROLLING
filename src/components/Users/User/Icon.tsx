@@ -31,6 +31,7 @@ interface IconProps {
 }
 
 const Icon = ({ user }: IconProps) => {
+	user.id;
 	const [currentUserIndex, setCurrentUserIndex] = useState(-1);
 	if (currentUserIndex == -1) {
 		setCurrentUserIndex(Math.floor(Math.random() * userSprites.length));

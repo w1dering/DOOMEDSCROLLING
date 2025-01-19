@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./Attention.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { RootState } from "../../../store/store";
 import { setShorts } from "../../../store/shortSlice";
 
@@ -58,7 +58,7 @@ const Attention = ({user, removeUser}: Props) => {
 			console.log(flashAnimation);
 
 			dispatch(setShorts({ currentShortScore: 0 }));
-			const timeout = setTimeout(() => {
+			setTimeout(() => {
 				setFlashAnimation(""); // Reset animation state
 			}, 1000);
             updateAttention(shorts.currentShortScore);

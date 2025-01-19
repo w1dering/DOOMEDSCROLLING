@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Scoreboard.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { setShorts } from "../../store/shortSlice";
+// import { setShorts } from "../../store/shortSlice";
 
 
 const Scoreboard = () => {
     const shorts = useSelector((state: RootState) => state.shorts);
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 
     const [reliability, setReliability] = useState(100);
 
