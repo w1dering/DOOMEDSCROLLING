@@ -7,10 +7,14 @@ import Attention from "./User/Attention";
 import Short from "../Shorts/Short";
 import Scoreboard from "../ScoreBoard/Scoreboard";
 import DayTimer from "../DayTimer/DayTimer";
+import { useDispatch } from "react-redux";
+import { setUsers } from "../../store/usersSlice";
 
 const UsersPanel = () => {
 	const users = useAppSelector((state) => state.users.users);
 	const visibleUserIds = useAppSelector((state) => state.users.visibleUsers);
+	const [lastVisibleIndex, setLastVisibleIndex] = useState(0);
+	const dispatch = useDispatch();
 
 	const visibleUsers = users.filter((user) =>
 		visibleUserIds.includes(user.id)
@@ -18,6 +22,7 @@ const UsersPanel = () => {
 
 	const [score, setScore] = useState(0); // initialize score
 	const [percentTimeUsed, setPercentTimeUsed] = useState(0); // initialize percent time used
+	const [timeUntilNextUser, setTimeUntilNextUser] = useState(3);
 
 	const updateScore = (newScore: number) => {
 		setScore((prevScore) => prevScore + newScore); // function to update score
@@ -35,13 +40,31 @@ const UsersPanel = () => {
 			});
 		}, 1000); // Update every second
 
+
 		return () => clearInterval(interval); // Cleanup interval on component unmount
 	}, []);
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			if (visibleUsers.length < 3) {
+				visibleUserIds.push(users[lastVisibleIndex + 1].id);
+			}
+			setLastVisibleIndex(prev => prev + 1);
+			setTimeUntilNextUser(Math.floor(Math.random() * 30 + 30));
+		}, timeUntilNextUser * 1000);
+	})
+
+	const removeUser = (id: string) => {
+		let index = visibleUserIds.findIndex((i) => i == id);
+		if (index != -1) {
+			visibleUserIds.splice(index, 1);
+		}
+	}
 
 	return (
 		<div className="users-panel">
 			<div className="top-panel">
-				<DayTimer percentTimeUsed={percentTimeUsed} />
+				{/* <DayTimer percentTimeUsed={percentTimeUsed} /> */}
 				<Scoreboard/>
 			</div>
 			<div className="users-list">
@@ -50,7 +73,7 @@ const UsersPanel = () => {
 						<Icon user={user} />
 						<div className="preferences-attention-container">
 							<Preferences user={user} />
-							<Attention user={user} />
+							<Attention user={user} removeUser={removeUser}/>
 						</div>
 						<Short
 							user={user}

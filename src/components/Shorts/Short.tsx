@@ -223,8 +223,8 @@ const Short = ({
 		}, [shorts]);
 
 		return (
-			<div className={`short current-short`}>
-				{shorts.currentShortContent && (
+			<div className={`short current-short ${!shorts.currentShortContent ? "rumble" : ""}`}>
+				{shorts.currentShortContent ? (
 					<>
 						<ShortContent content={shorts.currentShortContent} />
 						<img
@@ -235,7 +235,7 @@ const Short = ({
 							}}
 						></img>
 					</>
-				)}
+				) : "Add something!!!"}
 			</div>
 		);
 	}

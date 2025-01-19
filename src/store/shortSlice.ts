@@ -33,7 +33,10 @@ const initialState: Shorts = {
 		isDragging: false,
 		isTrending: false,
 	},
-	currentShortContent: null,
+	currentShortContent: {
+		img: "src/assets/thumbnails/puppy.gif",
+		text: "Cuteness overload with adorable puppies! #puppies #animals #cute",
+	},
 	currentShortScore: 0,
 	addShortContent: null,
 };

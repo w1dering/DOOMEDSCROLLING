@@ -15,15 +15,26 @@ interface User {
 	attention: number;
 }
 
-const Attention = ({ user }: { user: User }) => {
+interface Props {
+	user: User;
+	removeUser: (id: string) => void;
+}
+
+const Attention = ({user, removeUser}: Props) => {
 	const [attention, setAttention] = useState(100);
 	const shorts = useSelector((state: RootState) => state.shorts);
 	const dispatch = useDispatch();
+	const [decayRate, setDecayRate] = useState(1);
+
+	const [currentShortContentEmpty, setCurrentShortContentEmpty] = useState(false);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setAttention((prev) => Math.max(prev - 1, 0)); // Decrease attention by 1 per second, but not below 0
-		}, 1000);
+			setAttention((prev) => Math.max(prev - (decayRate / 2), 0)); // Decrease attention by 1 per second, but not below 0
+			if (attention <= 0) {
+				removeUser(user.id);
+			}
+		}, 500);
 
 		return () => clearInterval(interval); // Cleanup interval on component unmount
 	}, []);
@@ -54,6 +65,18 @@ const Attention = ({ user }: { user: User }) => {
 		}
 	}, [shorts.currentShortScore, dispatch]);
 
+	useEffect(() => {
+		if (!shorts.currentShortContent) {
+			setCurrentShortContentEmpty(true);
+			setDecayRate(3);
+			console.log("decay 3");
+		} else {
+			setCurrentShortContentEmpty(false);
+			setDecayRate(1);
+			console.log("decay 1");
+		}
+	}, [shorts.currentShortContent]);
+
 	const updateAttention = (rating: number) => {
 		setAttention((prev) => {
 			if (rating < 4) {
@@ -67,10 +90,14 @@ const Attention = ({ user }: { user: User }) => {
 	};
 
 	return (
-		<div className="attention-container">
+		<div className="attention-container" style={{borderColor: currentShortContentEmpty ? "#ff004f" : "white"}}>
 			<div
 				className="attention"
-				style={{ width: `${attention}%`, animation: flashAnimation }}
+				style={{
+					width: `${attention}%`,
+					animation: flashAnimation,
+					backgroundColor: currentShortContentEmpty ? "#ff004f" : "white",
+				}}
 			></div>
 		</div>
 	);
