@@ -34,6 +34,7 @@ interface DragState {
 	width: number;
 	height: number;
 	isDragging: boolean;
+	isTrending: boolean;
 }
 
 function throttle(func: Function, delay: number) {
@@ -152,6 +153,7 @@ const Short = ({ type = "random", content = { img: "", text: "" } }: Props) => {
 		width: 0,
 		height: 0,
 		isDragging: false,
+		isTrending: false,
 	});
 
 	const originalShortRef = useRef<HTMLDivElement | null>(null);
@@ -168,6 +170,7 @@ const Short = ({ type = "random", content = { img: "", text: "" } }: Props) => {
 				isDragging: true,
 				width,
 				height,
+				isTrending: type == "trending",
 			}));
 			dispatch(
 				setShorts({
@@ -207,6 +210,7 @@ const Short = ({ type = "random", content = { img: "", text: "" } }: Props) => {
 				isDragging: false,
 				width: 0,
 				height: 0,
+				isTrending: false,
 			});
 			setTimeout(() => {
 				dispatch(
@@ -236,6 +240,7 @@ const Short = ({ type = "random", content = { img: "", text: "" } }: Props) => {
 						top: dragState.y,
 						width: dragState.width,
 						height: dragState.height,
+						borderColor: dragState.isTrending ? "#ff8b54" : "white",
 					}}
 				>
 					<ShortContent content={content} />

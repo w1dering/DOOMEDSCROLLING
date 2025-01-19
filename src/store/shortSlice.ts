@@ -13,6 +13,7 @@ interface DragState {
 	width: number;
 	height: number;
 	isDragging: boolean;
+	isTrending: boolean;
 }
 
 interface Shorts {
@@ -29,6 +30,7 @@ const initialState: Shorts = {
 		width: 0,
 		height: 0,
 		isDragging: false,
+		isTrending: false,
 	},
 	currentShortContent: null,
 	addShortContent: null,

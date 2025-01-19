@@ -28,7 +28,7 @@ const ShortsPanel = () => {
                 <h1>Trending</h1>
                 <div className="slots-wrapper">
                     {shorts.slice(0, 5).map((short, index) => (
-                        <Short key={index} content={{img: short.imgSrc, text: short.text}}/>
+                        <Short type="trending" key={index} content={{img: short.imgSrc, text: short.text}}/>
                     ))}
                 </div>
             </div>
@@ -37,7 +37,7 @@ const ShortsPanel = () => {
                 <h1>Random</h1>
                 <div className="slots-wrapper">
                     {shorts.slice(5).map((short, index) => (
-                        <Short key={index} content={{img: short.imgSrc, text: short.text}}/>
+                        <Short type="random" key={index} content={{img: short.imgSrc, text: short.text}}/>
                     ))}
                 </div>
             </div>
