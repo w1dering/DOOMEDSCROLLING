@@ -3,6 +3,7 @@ import { useAppSelector } from '../../store/hooks';
 import { useState, useEffect } from "react";
 import Icon from "./User/Icon";
 import Preferences from "./User/Preferences";
+import Attention from "./User/Attention";
 import Short from "../Shorts/Short";
 import Scoreboard from "../ScoreBoard/Scoreboard";
 import DayTimer from "../DayTimer/DayTimer";
@@ -45,7 +46,10 @@ const UsersPanel = () => {
 				{visibleUsers.map((user) => (
 					<div key={user.id} className="user-item">
 							<Icon user={user} />
-							<Preferences user={user} />
+							<div className="preferences-attention-container">
+								<Preferences user={user} />
+								<Attention user={user} />
+							</div>
 							<Short type="current" content={{
 								imgSrc: "src/assets/thumbnails/food.gif", text: "balls"
 								}} />
