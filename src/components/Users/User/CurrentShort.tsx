@@ -13,13 +13,14 @@ interface User {
 
 interface CurrentShortProps {
     user: User;
+    updateAttention: (rating: number) => void;
 }
 
 interface ShortProps {
     text: string;
 }
 
-const CurrentShort = ({ user }: CurrentShortProps, { text }: ShortProps) => {
+const CurrentShort = ({ user, updateAttention }: CurrentShortProps, { text }: ShortProps) => {
     const judgeShort = async () => {
         try {
             const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -57,6 +58,8 @@ const CurrentShort = ({ user }: CurrentShortProps, { text }: ShortProps) => {
                     console.error(`Invalid score`);
                     throw new Error(`Score is invalid`);
                 }
+
+                updateAttention(score);
             } catch (parseError) {
                 console.error('JSON Parse Error:', parseError);
                 console.log('Failed to parse content:', content);

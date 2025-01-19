@@ -1,4 +1,5 @@
 import "./Attention.css";
+import React, { useState, useEffect } from "react";
 
 interface User {
     id: string;
@@ -12,9 +13,29 @@ interface User {
 }
 
 const Attention = ({user}: {user: User}) => {
+    const [attention, setAttention] = useState(100);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setAttention(prev => Math.max(prev - 1, 0)); // Decrease attention by 1 per second, but not below 0
+        }, 1000);
+
+        return () => clearInterval(interval); // Cleanup interval on component unmount
+    }, []);
+
+    const updateAttention = (rating: number) => {
+        setAttention(prev => {
+            if (rating < 5) {
+                return Math.max(prev - 10, 0); // Decrease by 10, but not below 0
+            } else {
+                return Math.min(prev + 10, 100); // Increase by 10, but not above 100
+            }
+        });
+    };
+
     return (
         <div className="attention-container">
-            <div className="attention" style={{ width: `${user.attention}%` }}>
+            <div className="attention" style={{ width: `${attention}%` }}>
             </div>
         </div>
     );
