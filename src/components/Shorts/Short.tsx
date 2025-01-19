@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import "./Short.css";
 
-interface ContentProps {
+export interface ContentProps {
 	img: string;
 	text: string;
 }
@@ -22,6 +22,8 @@ const ShortContent = ({ content }: ShortContentProps) => {
 interface Props {
 	type?: "current" | "add" | "trending" | "random" | "pinned" | "dummy";
 	content?: ContentProps;
+	listenToContent?: ContentProps;
+	onContentChange?: (content: ContentProps) => void;
 }
 
 interface DragState {
@@ -48,12 +50,18 @@ function throttle(func: Function, delay: number) {
 	};
 }
 
-const Short = ({ type = "random", content = { img: "", text: "" } }: Props) => {
+const Short = ({
+	type = "random",
+	content = { img: "", text: "" } || null,
+	listenToContent,
+	onContentChange,
+}: Props) => {
 	if (type == "add") {
 		const [currentContent, setCurrentContent] = useState<ContentProps>();
 		const handleDropShort = () => {
 			if (draggedShortContent) {
 				setCurrentContent(draggedShortContent!);
+				onContentChange?.(draggedShortContent!);
 			}
 			draggedShortContent = null;
 		};
@@ -72,12 +80,11 @@ const Short = ({ type = "random", content = { img: "", text: "" } }: Props) => {
 		);
 	}
 	if (type == "current") {
+		const displayContent = listenToContent || content;
 		return (
 			<div className={`short current-short`}>
-				{content && (
-					<>
-						<ShortContent content={content} />
-					</>
+				{displayContent && (
+					<ShortContent content={displayContent}/>
 				)}
 			</div>
 		);

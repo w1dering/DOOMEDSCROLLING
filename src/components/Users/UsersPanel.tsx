@@ -7,6 +7,7 @@ import Attention from "./User/Attention";
 import Short from "../Shorts/Short";
 import Scoreboard from "../ScoreBoard/Scoreboard";
 import DayTimer from "../DayTimer/DayTimer";
+import { ContentProps } from '../Shorts/Short';
 
 const UsersPanel = () => {
 	const users = useAppSelector(state => state.users.users);
@@ -16,6 +17,7 @@ const UsersPanel = () => {
 
 	const [score, setScore] = useState(0); // initialize score
 	const [percentTimeUsed, setPercentTimeUsed] = useState(0); // initialize percent time used
+	const [addShortContent, setAddShortContent] = useState<ContentProps>({ img: "", text: "" });
 	
 	const updateScore = (newScore: number) => {
 		setScore(prevScore => prevScore + newScore); // function to update score
@@ -36,6 +38,12 @@ const UsersPanel = () => {
         return () => clearInterval(interval); // Cleanup interval on component unmount
     }, []);
 
+	const handleContentChange = (newContent: ContentProps) => {
+		if (newContent.img && newContent.text && !addShortContent.img && !addShortContent.text) {
+			setAddShortContent(newContent);
+		}
+	};
+
 	return (
 		<div id="users-panel">
 			<div className="top-panel">
@@ -50,10 +58,14 @@ const UsersPanel = () => {
 								<Preferences user={user} />
 								<Attention user={user} />
 							</div>
-							<Short type="current" content={{
-								img: "food", text: "balls"
-								}} />
-                            <Short type="add"/>
+							<Short 
+								type="current" 
+								listenToContent={addShortContent} 
+							/>
+							<Short 
+								type="add" 
+								onContentChange={handleContentChange}
+							/>
 					</div>
 				))}
 			</div>
