@@ -1,6 +1,6 @@
 import './StartMenu.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setUsers, setIsLoading, addVisibleUser } from '../../store/usersSlice';
+import { setUsers, setIsLoading, addVisibleUser, setShorts } from '../../store/usersSlice';
 import { useState } from 'react';
 import { thumbnails, thumbnailsSrc } from '../../assets/thumbnails/thumbnails.json';
 const StartMenu = () => {
@@ -69,6 +69,7 @@ const StartMenu = () => {
                 dispatch(setUsers(usersWithIds));
                 if (usersWithIds.length > 0) {
                     dispatch(addVisibleUser(usersWithIds[0].id));
+                    await generateShorts();
                 }
                 setIsVisible(false);
             } catch (parseError) {
@@ -96,7 +97,7 @@ const StartMenu = () => {
                     model: "gpt-3.5-turbo",
                     messages: [{
                         role: "user",
-                        content: `Generate 5 random shorts with these properties: imgSrc (URL to a thumbnail image), text (a 5 to 7 word description of the short, along with exactly 3 tags or 'hashtags' that are relevant to the short and describe the content of the short). Return only a valid JSON array with no additional text. You must choose from the following list of thumbnails: ${thumbnails.map(thumbnail => thumbnailsSrc + thumbnail).join(', ')}. The text should be a short description of the short, and the image should be a URL to a thumbnail image. For example, a video of a dog playing fetch might have the imgSrc "src/assets/thumbnails/puppy.gif" and the text "Playing fetch with Bruno! #dog #cute #sports". Please have the short form videos cover a variety of topics, such as animals, photography, video games, music, sports, challenges, celebrities, science, and more. Ideally, some (but not all) of the topics of the shorts should be absurd, humorous, or somewhat strange. Copy the style of titles in Instagram Reels, TikTok, and YouTube Shorts. If you choose to include a date in the text, note that it is currently January 2025.`
+                        content: `Generate 15 random shorts with these properties: imgSrc (URL to a thumbnail image), text (a 5 to 7 word description of the short, along with exactly 3 tags or 'hashtags' that are relevant to the short and describe the content of the short). Return only a valid JSON array with no additional text. You must choose from the following list of thumbnails: ${thumbnails.map(thumbnail => thumbnailsSrc + thumbnail).join(', ')}. The text should be a short description of the short, and the image should be a URL to a thumbnail image. For example, a video of a dog playing fetch might have the imgSrc "src/assets/thumbnails/puppy.gif" and the text "Playing fetch with Bruno! #dog #cute #sports". Please have the short form videos cover a variety of topics, such as animals, photography, video games, music, sports, challenges, celebrities, science, and more. Ideally, some (but not all) of the topics of the shorts should be absurd, humorous, or somewhat strange. Copy the style of titles in Instagram Reels, TikTok, and YouTube Shorts. If you choose to include a date in the text, note that it is currently January 2025.`
                     }],
                     temperature: 1
                 })
@@ -104,9 +105,15 @@ const StartMenu = () => {
 
             const data = await response.json();
             console.log('API Response:', data);
+            
+            if (!data.choices?.[0]?.message?.content) {
+                throw new Error('Invalid API response structure');
+            }
 
-            /* USE "data" AS THE JSON ARRAY OF SHORTS */
-
+            const content = data.choices[0].message.content;
+            const shorts = JSON.parse(content);
+            dispatch(setShorts(shorts));
+            
         } catch (error) {
             console.error('Error generating shorts:', error);
         } finally {

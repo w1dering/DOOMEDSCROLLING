@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Short from "./Short";
+import { useAppSelector } from '../../store/hooks';
 
 import food from "../../assets/thumbnails/food.gif";
 import puppy from "../../assets/thumbnails/puppy.gif";
@@ -17,6 +18,7 @@ import boardgame from "../../assets/thumbnails/boardgame.gif";
 import "./ShortsPanel.css";
 
 const ShortsPanel = () => {
+    const shorts = useAppSelector(state => state.users.shorts);
     const [slotsTrending, setSlotsTrending] = useState(["Slot 1", "Slot 2", "Slot 3", "Slot 4"]);
     const [slotsRandom] = useState(["Slot 1", "Slot 2", "Slot 3", "Slot 4",  "Slot 2",
                                 "Slot 2",  "Slot 2",  "Slot 2",  "Slot 2", "Slot 2"])
@@ -38,8 +40,8 @@ const ShortsPanel = () => {
             <div id="trending-shorts-panel">
                 <h1>Trending</h1>
                 <div className="slots-wrapper">
-                    {slotsTrending.map((slot) => (
-                        <Short content={{img: anime, text: slot}}/>
+                    {shorts.slice(0, 5).map((short, index) => (
+                        <Short key={index} content={{img: short.imgSrc, text: short.text}}/>
                     ))}
                 </div>
                 <button onClick={addSlot} id="add-slot-button">
@@ -50,8 +52,8 @@ const ShortsPanel = () => {
             <div id="random-shorts-panel">
                 <h1>Random</h1>
                 <div className="slots-wrapper">
-                    {slotsRandom.map((slot) => (
-                        <Short content={{img: getRandomGif(), text: slot}}/>
+                    {shorts.slice(5).map((short, index) => (
+                        <Short key={index} content={{img: short.imgSrc, text: short.text}}/>
                     ))}
                 </div>
             </div>
