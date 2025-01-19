@@ -1,4 +1,4 @@
 {
     "thumbnailsSrc": "src/assets/thumbnails/",
-    "thumbnails": ["anime.gif", "astronomy.gif", "basketball.gif", "boardgame.gif", "car.gif", "fashion.gif", "finance.gif", "food.gif", "puppy.gif", "romance.gif", "singer.gif", "soccer.gif", "sword_fight.gif", "tennis.gif", "volcano.gif"]
+    "thumbnails": ["anime.gif", "art.gif", "astronomy.gif", "basketball.gif", "boardgame.gif", "car.gif", "fashion.gif", "finance.gif", "food.gif", "puppy.gif", "romance.gif", "singer.gif", "soccer.gif", "sword_fight.gif", "tennis.gif", "tetris.gif", "volcano.gif"]
 }
