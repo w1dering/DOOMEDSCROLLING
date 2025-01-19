@@ -19,6 +19,7 @@ interface DragState {
 interface Shorts {
 	dragState: DragState;
 	currentShortContent: ContentProps | null;
+	currentShortScore: number;
 	addShortContent: ContentProps | null;
 }
 
@@ -33,6 +34,7 @@ const initialState: Shorts = {
 		isTrending: false,
 	},
 	currentShortContent: null,
+	currentShortScore: 0,
 	addShortContent: null,
 };
 
