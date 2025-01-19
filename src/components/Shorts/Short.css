@@ -48,4 +48,5 @@
 .short-text {
     flex: 7;
     width: 100%;
+    font-size: 12px;
 }
