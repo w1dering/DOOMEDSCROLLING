@@ -15,14 +15,8 @@ import "./ShortsPanel.css";
 
 const ShortsPanel = () => {
     const shorts = useAppSelector(state => state.users.shorts);
-    const [slotsTrending, setSlotsTrending] = useState(["Slot 1", "Slot 2", "Slot 3", "Slot 4"]);
-    const [slotsRandom] = useState(["Slot 1", "Slot 2", "Slot 3", "Slot 4",  "Slot 2",
-                                "Slot 2",  "Slot 2",  "Slot 2",  "Slot 2", "Slot 2"])
-
-    const addSlot = () => {
-        const newSlot = `Slot ${slotsTrending.length + 1}`;
-        setSlotsTrending([...slotsTrending, newSlot]);
-    };
+    const [slotsTrending, setSlotsTrending] = useState("");
+    const [slotsRandom] = useState("")
 
     return (
         <div id="shorts-panel">
@@ -33,9 +27,6 @@ const ShortsPanel = () => {
                         <Short key={index} content={{img: short.imgSrc, text: short.text}}/>
                     ))}
                 </div>
-                <button onClick={addSlot} id="add-slot-button">
-                    Add Slot
-                </button>
             </div>
 
             <div id="random-shorts-panel">
