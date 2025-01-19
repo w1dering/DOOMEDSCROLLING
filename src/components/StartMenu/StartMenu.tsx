@@ -62,7 +62,8 @@ const StartMenu = () => {
                     age: user.age,
                     searchHistory: user.searchHistory,
                     likes: user.likes,
-                    dislikes: user.dislikes
+                    dislikes: user.dislikes,
+                    attention: 100
                 }));
 
                 dispatch(setUsers(usersWithIds));

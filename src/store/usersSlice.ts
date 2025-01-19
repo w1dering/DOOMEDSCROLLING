@@ -8,6 +8,7 @@ interface User {
     searchHistory: string[];
     likes: string[];
     dislikes: string[];
+    attention: number;
 }
 
 interface UsersState {
