@@ -42,7 +42,7 @@ const UsersPanel = () => {
 		<div className="users-panel">
 			<div className="top-panel">
 				<DayTimer percentTimeUsed={percentTimeUsed} />
-				<Scoreboard score={score} />
+				<Scoreboard/>
 			</div>
 			<div className="users-list">
 				{visibleUsers.map((user) => (

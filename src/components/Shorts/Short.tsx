@@ -195,7 +195,7 @@ const Short = ({
 		}
 
 		const [currentShortDuration, setCurrentShortDuration] = useState(
-			Math.floor(Math.random() * 11) + 15
+			Math.floor(Math.random() * 9) + 7
 		);
 		const [percentTimeUsed, setPercentTimeUsed] = useState(0);
 
@@ -206,21 +206,18 @@ const Short = ({
 			const interval = setInterval(() => {
 				setPercentTimeUsed((prev) => {
 					if (prev < 100) {
-						return prev + 100 / currentShortDuration;
+						return prev + 50 / currentShortDuration;
 					} else {
 						clearInterval(interval);
-						if (shorts.addShortContent) {
-							moveAddToCurrentAndJudge(user);
-							setCurrentShortDuration(
-								Math.floor(Math.random() * 11) + 15
-							);
-						} else {
-							dispatch(setShorts({ currentShortContent: null }));
-						}
+						dispatch(setShorts({ currentShortContent: null }));
+						moveAddToCurrentAndJudge(user);
+						setCurrentShortDuration(
+							Math.floor(Math.random() * 9) + 7
+						);
 						return 0;
 					}
 				});
-			}, 1000); // Update every second
+			}, 500); // Update twice a second
 
 			return () => clearInterval(interval!); // Cleanup interval on component unmount
 		}, [shorts]);

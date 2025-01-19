@@ -50,6 +50,7 @@ const Attention = ({ user }: { user: User }) => {
 			const timeout = setTimeout(() => {
 				setFlashAnimation(""); // Reset animation state
 			}, 1000);
+            updateAttention(shorts.currentShortScore);
 		}
 	}, [shorts.currentShortScore, dispatch]);
 
