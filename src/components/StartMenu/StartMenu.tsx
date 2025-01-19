@@ -111,11 +111,33 @@ const StartMenu = () => {
             }
 
             const content = data.choices[0].message.content;
-            const shorts = JSON.parse(content);
-            dispatch(setShorts(shorts));
-            
+            console.log('Raw shorts content:', content);
+
+            try {
+                const shorts = JSON.parse(content);
+                console.log('Parsed shorts:', shorts);
+                
+                if (!Array.isArray(shorts)) {
+                    throw new Error('Shorts must be an array');
+                }
+
+                shorts.forEach((short, index) => {
+                    if (!short.imgSrc || !short.text) {
+                        throw new Error(`Short at index ${index} is missing required fields`);
+                    }
+                });
+
+                dispatch(setShorts(shorts));
+            } catch (parseError) {
+                console.error('JSON Parse Error:', parseError);
+                console.log('Failed to parse content:', content);
+                throw parseError;
+            }
         } catch (error) {
             console.error('Error generating shorts:', error);
+            if (error instanceof SyntaxError) {
+                console.error('JSON Syntax Error details:', error.message);
+            }
         } finally {
             dispatch(setIsLoading(false));
         }
