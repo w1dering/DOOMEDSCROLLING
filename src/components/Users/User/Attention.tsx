@@ -28,23 +28,30 @@ const Attention = ({ user }: { user: User }) => {
 		return () => clearInterval(interval); // Cleanup interval on component unmount
 	}, []);
 
-	let flashAnimation = "";
+    
+	const [flashAnimation, setFlashAnimation] = useState("");
 
 	useEffect(() => {
+		let rating;
 		if (shorts.currentShortScore > 0) {
 			if (shorts.currentShortScore < 4) {
-				flashAnimation = "bad";
+				rating = "bad";
 			} else if (shorts.currentShortScore < 7) {
-				flashAnimation = "ok";
+				rating = "ok";
 			} else {
-				flashAnimation = "good";
+				rating = "good";
 			}
 
-			flashAnimation = `${flashAnimation} 1s ease-in-out`;
+			setFlashAnimation(`${rating} 1s ease-in-out`);
+
+			console.log(flashAnimation);
 
 			dispatch(setShorts({ currentShortScore: 0 }));
+			const timeout = setTimeout(() => {
+				setFlashAnimation(""); // Reset animation state
+			}, 1000);
 		}
-	}, [shorts.currentShortScore]);
+	}, [shorts.currentShortScore, dispatch]);
 
 	const updateAttention = (rating: number) => {
 		setAttention((prev) => {

@@ -104,7 +104,7 @@ const Short = ({
 										", "
 									)}. You are determining whether or not to give your attention to a short form video represented by giving it a score of 1 to 10. The short has the following title: "${
 										shorts.dragState.content
-									}". Give it a score of 1 to 10, where a score of 1 is the minimum score, representing an extremely negative reaction to the short, and 10 is the highest possible score, representing an extremely positive reaction to the short. A score of 5 indicates that your reaction to the short is neutral. Return your score as a JSON object in the following format: {"score": 10}. Be reasonably polarized, giving equal weight to all numbers. Do not return anything else.`,
+									}". Give it a score of 1 to 10, where a score of 1 is the minimum score, representing a negative reaction to the short, and 10 is the highest possible score, representing a positive reaction to the short. A score of 5 indicates that your reaction to the short is neutral. Return your score as a JSON object in the following format: {"score": 10}. Be reasonably polarized, giving equal weight to all numbers. Do not return anything else.`,
 								},
 							],
 							temperature: 1,
@@ -132,7 +132,7 @@ const Short = ({
 						throw new Error(`Score is invalid`);
 					}
 
-					dispatch(setShorts({ currentShortScore: score }));
+					dispatch(setShorts({ currentShortScore: score["score"] }));
 
 				} catch (parseError) {
 					console.error("JSON Parse Error:", parseError);
@@ -210,12 +210,7 @@ const Short = ({
 					} else {
 						clearInterval(interval);
 						if (shorts.addShortContent) {
-							dispatch(
-								setShorts({
-									currentShortContent: shorts.addShortContent,
-								})
-							);
-							dispatch(setShorts({ addShortContent: null }));
+							moveAddToCurrentAndJudge(user);
 							setCurrentShortDuration(
 								Math.floor(Math.random() * 11) + 15
 							);
