@@ -14,6 +14,9 @@ import finance from "../../assets/thumbnails/finance.gif";
 import astronomy from "../../assets/thumbnails/astronomy.gif";
 import romance from "../../assets/thumbnails/romance.gif";
 import boardgame from "../../assets/thumbnails/boardgame.gif";
+import basketball from "../../assets/thumbnails/basketball.gif";
+import soccer from "../../assets/thumbnails/soccer.gif";
+
 
 import "./ShortsPanel.css";
 
