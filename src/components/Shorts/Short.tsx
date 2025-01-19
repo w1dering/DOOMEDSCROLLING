@@ -64,7 +64,7 @@ const Short = ({
 				{content.img ? (
 					<ShortContent content={content} />
 				) : (
-					<img src="src\assets\plusIcon.png" alt="plus" draggable="false"/>
+					<img className="add-short-icon" src="src\assets\plusIcon.png" alt="plus" draggable="false"/>
 				)}
 			</div>
 		);

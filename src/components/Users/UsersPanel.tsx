@@ -60,7 +60,7 @@ const UsersPanel = ({
 
 
 	return (
-		<div id="users-panel">
+		<div className="users-panel">
 			<div className="top-panel">
 				<DayTimer percentTimeUsed={percentTimeUsed} />
 				<Scoreboard score={score} />
@@ -68,44 +68,29 @@ const UsersPanel = ({
 			<div className="users-list">
 				{visibleUsers.map((user) => (
 					<div key={user.id} className="user-item">
-						<Icon user={user} />
+						<div className="user-img">
+							<Icon user={user} />
+						</div>
 						<div className="preferences-attention-container">
 							<Preferences user={user} />
 							<Attention user={user} />
 						</div>
 						<Short
 							type="current"
-							content={
-								currentShortContent || {
-									img: "",
-									text: "Add something!",
-								}
-							}
+							content={currentShortContent || {
+								img: "",
+								text: "Add something!",
+							}}
 							setCurrentShortContent={setCurrentShortContent}
 							setAddShortContent={setAddShortContent}
-							currentShortPercentTimeUsed={
-								currentShortPercentTimeUsed
-							}
+							currentShortPercentTimeUsed={currentShortPercentTimeUsed}
 						/>
 						<Short
 							type="add"
-							content={
-								addShortContent || { img: "", text: "" }
-							}
+							content={addShortContent || { img: "", text: "" }}
 							setCurrentShortContent={setCurrentShortContent}
 							setAddShortContent={setAddShortContent}
 						/>
-							<Icon user={user} />
-							<div className="preferences-attention-container">
-								<Preferences user={user} />
-								<Attention user={user} />
-							</div>
-							<Short 
-								type="current" 
-							/>
-							<Short 
-								type="add" 
-							/>
 					</div>
 				))}
 			</div>
