@@ -32,7 +32,7 @@ const UsersPanel = () => {
 								<Attention user={user} />
 							</div>
 							<Short type="current" content={{
-								imgSrc: "src/assets/thumbnails/food.gif", text: "balls"
+								img: "food", text: "balls"
 								}} />
                             <Short type="add"/>
 					</div>
