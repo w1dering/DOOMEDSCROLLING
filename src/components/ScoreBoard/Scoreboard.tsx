@@ -8,7 +8,7 @@ interface ScoreboardProps {
 const Scoreboard = ({ score }: ScoreboardProps) => {
     return (
         <div className="scoreboard">
-            <h1>Score: {score}</h1>
+            Score: {score}
         </div>
     );
 };

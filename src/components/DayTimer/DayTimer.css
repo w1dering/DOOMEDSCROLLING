@@ -1,8 +1,5 @@
 #day-timer {
-    height: 10%;
+    height: 100%;
     width: auto;
-    position: absolute;
-    align-self: center;
-    object-fit: cover;
-    overflow: hidden;
+    margin-left: 5%;
 }
