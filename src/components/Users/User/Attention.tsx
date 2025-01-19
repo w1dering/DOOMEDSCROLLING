@@ -25,8 +25,10 @@ const Attention = ({user}: {user: User}) => {
 
     const updateAttention = (rating: number) => {
         setAttention(prev => {
-            if (rating < 5) {
+            if (rating < 4) {
                 return Math.max(prev - 10, 0); // Decrease by 10, but not below 0
+            } else if (rating < 7) {
+                return prev;
             } else {
                 return Math.min(prev + 10, 100); // Increase by 10, but not above 100
             }
