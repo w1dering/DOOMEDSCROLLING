@@ -35,7 +35,8 @@ interface DragState {
 
 let draggedShortContent: ContentProps | null;
 
-function throttle(func: Function, delay: number) { // forces a delay in between function calls
+function throttle(func: Function, delay: number) {
+	// forces a delay in between function calls
 	let lastTime = 0;
 
 	return function (...args: any[]) {
@@ -47,10 +48,7 @@ function throttle(func: Function, delay: number) { // forces a delay in between 
 	};
 }
 
-const Short = ({
-	type = "random",
-	content = { img: "", text: "" },
-}: Props) => {
+const Short = ({ type = "random", content = { img: "", text: "" } }: Props) => {
 	if (type == "add") {
 		const [currentContent, setCurrentContent] = useState<ContentProps>();
 		const handleDropShort = () => {
@@ -60,9 +58,13 @@ const Short = ({
 			draggedShortContent = null;
 		};
 		return (
-			<div className="short add-short" onMouseUp={handleDropShort}>
+			<div
+				className="short add-short"
+				onMouseUp={handleDropShort}
+				style={currentContent ? { borderStyle: "solid" } : undefined}
+			>
 				{currentContent ? (
-					<ShortContent content={currentContent}/>
+					<ShortContent content={currentContent} />
 				) : (
 					<img src="src\assets\plusIcon.png" alt="plus" />
 				)}
@@ -74,7 +76,7 @@ const Short = ({
 			<div className={`short current-short`}>
 				{content && (
 					<>
-						<ShortContent content={content}/>
+						<ShortContent content={content} />
 					</>
 				)}
 			</div>
@@ -93,7 +95,7 @@ const Short = ({
 	const originalShortRef = useRef<HTMLDivElement | null>(null);
 
 	const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-        e.preventDefault();
+		e.preventDefault();
 		if (originalShortRef.current) {
 			const { width, height } =
 				originalShortRef.current.getBoundingClientRect();
@@ -107,7 +109,7 @@ const Short = ({
 			}));
 			draggedShortContent = content;
 
-            document.removeEventListener("mousemove", handleMouseMove);
+			document.removeEventListener("mousemove", handleMouseMove);
 			document.removeEventListener("mouseup", handleMouseUp);
 
 			document.addEventListener("mousemove", handleMouseMove);
@@ -118,7 +120,7 @@ const Short = ({
 	};
 
 	const handleMouseMove = throttle((e: MouseEvent) => {
-        e.preventDefault();
+		e.preventDefault();
 		setDragState((prev) => ({
 			...prev,
 			x: e.clientX,
@@ -127,7 +129,7 @@ const Short = ({
 	}, 16);
 
 	const handleMouseUp = (e: MouseEvent) => {
-        e.preventDefault();
+		e.preventDefault();
 		document.removeEventListener("mousemove", handleMouseMove);
 		document.removeEventListener("mouseup", handleMouseUp);
 
@@ -154,7 +156,7 @@ const Short = ({
 				style={dragState.isDragging ? { opacity: "50%" } : undefined}
 				ref={originalShortRef}
 			>
-				<ShortContent content={content}/>
+				<ShortContent content={content} />
 			</div>
 			{dragState.isDragging && (
 				<div
@@ -166,7 +168,7 @@ const Short = ({
 						height: dragState.height,
 					}}
 				>
-					<ShortContent content={content}/>
+					<ShortContent content={content} />
 				</div>
 			)}
 		</>
