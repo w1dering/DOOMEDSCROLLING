@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./Short.css";
 
 export interface ContentProps {
@@ -13,18 +13,11 @@ interface ShortContentProps {
 const ShortContent = ({ content }: ShortContentProps) => {
 	return (
 		<>
-			<img src={content.img} className="short-img"></img>
+			{content.img && <img src={content.img} className="short-img" draggable="false"/>}
 			<p className="short-text">{content.text}</p>
 		</>
 	);
 };
-
-interface Props {
-	type?: "current" | "add" | "trending" | "random" | "pinned" | "dummy";
-	content?: ContentProps;
-	listenToContent?: ContentProps;
-	onContentChange?: (content: ContentProps) => void;
-}
 
 interface DragState {
 	content: ContentProps | null;
@@ -35,69 +28,73 @@ interface DragState {
 	isDragging: boolean;
 }
 
-let draggedShortContent: ContentProps | null;
-
-function throttle(func: Function, delay: number) {
-	// forces a delay in between function calls
-	let lastTime = 0;
-
-	return function (...args: any[]) {
-		const now = new Date().getTime();
-		if (now - lastTime >= delay) {
-			lastTime = now;
-			return func(...args);
-		}
-	};
+interface Props {
+	type?: "current" | "add" | "trending" | "random" | "pinned" | "dummy";
+	content?: ContentProps;
+	setCurrentShortContent?: (arg: string) => void;
+	setAddShortContent?: (arg: string) => void;
+	currentShortPercentTimeUsed?: number;
+	dragState?: DragState;
+	setDragState?: (dragState: DragState) => void;
 }
 
 const Short = ({
 	type = "random",
-	content = { img: "", text: "" } || null,
-	listenToContent,
-	onContentChange,
+	content = { img: "", text: "" },
+	setAddShortContent,
+	setCurrentShortContent,
+	currentShortPercentTimeUsed = 0,
+	dragState,
+	setDragState,
 }: Props) => {
 	if (type == "add") {
-		const [currentContent, setCurrentContent] = useState<ContentProps>();
 		const handleDropShort = () => {
-			if (draggedShortContent) {
-				setCurrentContent(draggedShortContent!);
-				onContentChange?.(draggedShortContent!);
+			console.log("trying to drop");
+			if (setAddShortContent) {
+				setAddShortContent("drag");
 			}
-			draggedShortContent = null;
 		};
+
 		return (
 			<div
 				className="short add-short"
 				onMouseUp={handleDropShort}
-				style={currentContent ? { borderStyle: "solid" } : undefined}
+				style={content ? { borderStyle: "solid" } : undefined}
 			>
-				{currentContent ? (
-					<ShortContent content={currentContent} />
+				{content.img ? (
+					<ShortContent content={content} />
 				) : (
-					<img src="src\assets\plusIcon.png" alt="plus" />
+					<img src="src\assets\plusIcon.png" alt="plus" draggable="false"/>
 				)}
 			</div>
 		);
 	}
 	if (type == "current") {
-		const displayContent = listenToContent || content;
 		return (
 			<div className={`short current-short`}>
-				{displayContent && (
-					<ShortContent content={displayContent}/>
+				<ShortContent content={content} />
+				{content.img && (
+					<img
+						id="current-timer"
+						src="/src/assets/logo.png"
+						style={{
+							clipPath: `inset(${currentShortPercentTimeUsed}% 0% 0% 0%)`,
+						}}
+					></img>
 				)}
 			</div>
 		);
 	}
 
-	const [dragState, setDragState] = useState<DragState>({
-		content: null,
-		x: 0,
-		y: 0,
-		width: 0,
-		height: 0,
-		isDragging: false,
-	});
+    if (!dragState) {
+        console.log("dragState null");
+        return;
+    }
+
+	if (!setDragState) {
+		console.log("setDragState null");
+		return;
+	}
 
 	const originalShortRef = useRef<HTMLDivElement | null>(null);
 
@@ -106,38 +103,24 @@ const Short = ({
 		if (originalShortRef.current) {
 			const { width, height } =
 				originalShortRef.current.getBoundingClientRect();
-			setDragState(() => ({
+			setDragState({
 				content,
 				x: e.clientX,
 				y: e.clientY,
-				isDragging: true,
 				width,
 				height,
-			}));
-			draggedShortContent = content;
+				isDragging: true,
+			});
 
-			document.removeEventListener("mousemove", handleMouseMove);
 			document.removeEventListener("mouseup", handleMouseUp);
-
-			document.addEventListener("mousemove", handleMouseMove);
 			document.addEventListener("mouseup", handleMouseUp);
 		} else {
 			console.log("bruh");
 		}
 	};
 
-	const handleMouseMove = throttle((e: MouseEvent) => {
-		e.preventDefault();
-		setDragState((prev) => ({
-			...prev,
-			x: e.clientX,
-			y: e.clientY,
-		}));
-	}, 16);
-
 	const handleMouseUp = (e: MouseEvent) => {
 		e.preventDefault();
-		document.removeEventListener("mousemove", handleMouseMove);
 		document.removeEventListener("mouseup", handleMouseUp);
 
 		if (originalShortRef.current) {
@@ -149,9 +132,6 @@ const Short = ({
 				width: 0,
 				height: 0,
 			});
-			setTimeout(() => {
-				draggedShortContent = null;
-			}, 100);
 		}
 	};
 
@@ -165,19 +145,6 @@ const Short = ({
 			>
 				<ShortContent content={content} />
 			</div>
-			{dragState.isDragging && (
-				<div
-					className="short dummy-short"
-					style={{
-						left: dragState.x,
-						top: dragState.y,
-						width: dragState.width,
-						height: dragState.height,
-					}}
-				>
-					<ShortContent content={content} />
-				</div>
-			)}
 		</>
 	);
 };
