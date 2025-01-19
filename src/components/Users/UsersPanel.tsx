@@ -37,7 +37,7 @@ const UsersPanel = () => {
     }, []);
 
 	return (
-		<div id="users-panel">
+		<div className="users-panel">
 			<div className="top-panel">
                 <DayTimer percentTimeUsed={percentTimeUsed} />
                 <Scoreboard score={score} />

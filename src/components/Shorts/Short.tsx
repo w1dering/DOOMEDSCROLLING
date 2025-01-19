@@ -85,7 +85,7 @@ const Short = ({ type = "random", content = { img: "", text: "" } }: Props) => {
 				{shorts.addShortContent ? (
 					<ShortContent content={shorts.addShortContent} />
 				) : (
-					<img src="src\assets\plusIcon.png" alt="plus" />
+					<img className="add-short-icon" src="src\assets\plusIcon.png" alt="plus" draggable="false"/>
 				)}
 			</div>
 		);
