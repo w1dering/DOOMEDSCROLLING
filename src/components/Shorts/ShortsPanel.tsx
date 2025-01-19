@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Short from "./Short";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector } from '../../store/hooks';
 
 import food from "../../assets/thumbnails/food.gif";
 import puppy from "../../assets/thumbnails/puppy.gif";
@@ -14,68 +14,35 @@ import finance from "../../assets/thumbnails/finance.gif";
 import astronomy from "../../assets/thumbnails/astronomy.gif";
 import romance from "../../assets/thumbnails/romance.gif";
 import boardgame from "../../assets/thumbnails/boardgame.gif";
-import basketball from "../../assets/thumbnails/basketball.gif";
-import soccer from "../../assets/thumbnails/soccer.gif";
-
 
 import "./ShortsPanel.css";
 
+const ShortsPanel = () => {
+    const shorts = useAppSelector(state => state.users.shorts);
+    const [slotsTrending, setSlotsTrending] = useState("");
+    const [slotsRandom] = useState("")
 
-interface ContentProps {
-	img: string;
-	text: string;
-}
+    return (
+        <div id="shorts-panel">
+            <div id="trending-shorts-panel">
+                <h1>Trending</h1>
+                <div className="slots-wrapper">
+                    {shorts.slice(0, 5).map((short, index) => (
+                        <Short key={index} content={{img: short.imgSrc, text: short.text}}/>
+                    ))}
+                </div>
+            </div>
 
-interface DragState {
-	content: ContentProps | null;
-	x: number;
-	y: number;
-	width: number;
-	height: number;
-	isDragging: boolean;
-}
-
-interface Props {
-	setDragState: (dragState: DragState) => void;
-	dragState: DragState;
-}
-
-const ShortsPanel = ({ setDragState, dragState }: Props) => {
-	const shorts = useAppSelector((state) => state.users.shorts);
-	const [slotsTrending, setSlotsTrending] = useState("");
-	const [slotsRandom] = useState("");
-
-	return (
-		<div id="shorts-panel">
-			<div id="trending-shorts-panel">
-				<h1>Trending</h1>
-				<div className="slots-wrapper">
-					{shorts.slice(0, 5).map((short, index) => (
-						<Short
-							key={index}
-							content={{ img: short.imgSrc, text: short.text }}
-							dragState={dragState}
-							setDragState={setDragState}
-						/>
-					))}
-				</div>
-			</div>
-
-			<div id="random-shorts-panel">
-				<h1>Random</h1>
-				<div className="slots-wrapper">
-					{shorts.slice(5).map((short, index) => (
-						<Short
-							key={index}
-							content={{ img: short.imgSrc, text: short.text }}
-							dragState={dragState}
-							setDragState={setDragState}
-						/>
-					))}
-				</div>
-			</div>
-		</div>
-	);
+            <div id="random-shorts-panel">
+                <h1>Random</h1>
+                <div className="slots-wrapper">
+                    {shorts.slice(5).map((short, index) => (
+                        <Short key={index} content={{img: short.imgSrc, text: short.text}}/>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default ShortsPanel;
