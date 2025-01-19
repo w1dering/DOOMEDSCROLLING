@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import Short from "./Short";
 
+import food from "../../assets/thumbnails/food.gif";
+import puppy from "../../assets/thumbnails/puppy.gif";
+import singer from "../../assets/thumbnails/singer.gif";
+import swordFight from "../../assets/thumbnails/swordFight.gif";
+import tennis from "../../assets/thumbnails/tennis.gif";
+import volcano from "../../assets/thumbnails/volcano.gif";
+import anime from "../../assets/thumbnails/anime.gif";
+
+
 import "./ShortsPanel.css";
 
 const ShortsPanel = () => {
@@ -19,7 +28,7 @@ const ShortsPanel = () => {
                 <h1>Trending</h1>
                 <div className="slots-wrapper">
                     {slotsTrending.map((slot) => (
-                        <Short content={{imgSrc: "", text: slot}}/>
+                        <Short content={{img: anime, text: slot}}/>
                     ))}
                 </div>
                 <button onClick={addSlot} id="add-slot-button">
@@ -31,7 +40,7 @@ const ShortsPanel = () => {
                 <h1>Random</h1>
                 <div className="slots-wrapper">
                     {slotsRandom.map((slot) => (
-                        <Short content={{imgSrc: "", text: slot}}/>
+                        <Short content={{img: volcano, text: slot}}/>
                     ))}
                 </div>
             </div>

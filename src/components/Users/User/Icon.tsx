@@ -3,12 +3,12 @@ import deskrotting from "../../../assets/users/deskrotting.gif";
 import floorrotting from "../../../assets/users/floorrotting.gif";
 import "./Icon.css";
 
-const userSprites = [bedrotting, deskrotting, floorrotting];
-
 interface User {
 	id: string;
 	name: string;
 }
+
+const userSprites = [bedrotting, deskrotting, floorrotting];
 
 interface IconProps {
 	user: User;
