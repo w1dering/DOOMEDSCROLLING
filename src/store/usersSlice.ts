@@ -11,16 +11,23 @@ interface User {
     attention: number;
 }
 
+interface Short {
+    imgSrc: string;
+    text: string;
+}
+
 interface UsersState {
     users: User[];
     visibleUsers: string[]; // Array of user IDs that should be visible
     isLoading: boolean;
+    shorts: Short[];
 }
 
 const initialState: UsersState = {
     users: [],
     visibleUsers: [], // Initially empty
-    isLoading: false
+    isLoading: false,
+    shorts: [],
 };
 
 const usersSlice = createSlice({
@@ -46,7 +53,10 @@ const usersSlice = createSlice({
         },
         clearVisibleUsers: (state) => {
             state.visibleUsers = [];
-        }
+        },
+        setShorts: (state, action: PayloadAction<Short[]>) => {
+            state.shorts = action.payload;
+        },
     }
 });
 
@@ -56,6 +66,7 @@ export const {
     setVisibleUsers, 
     addVisibleUser, 
     removeVisibleUser, 
-    clearVisibleUsers 
+    clearVisibleUsers, 
+    setShorts 
 } = usersSlice.actions;
 export default usersSlice.reducer;
